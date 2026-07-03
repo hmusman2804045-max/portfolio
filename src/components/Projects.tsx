@@ -123,7 +123,7 @@ export default function Projects() {
             ? FEATURED_REPOS.map((name) => <SkeletonCard key={name} />)
             : projects.map((project, i) => (
                 <FadeUp
-                  key={project.repoUrl}
+                  key={project.title}
                   delay={0.1 + i * 0.1}
                   y={24}
                   className="h-full"
