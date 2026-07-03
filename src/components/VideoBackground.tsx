@@ -1,4 +1,4 @@
-const VIDEO_SRC = '/bg-video.mp4'
+import VIDEO_SRC from '../assets/bg-video.mp4'
 
 export default function VideoBackground() {
   return (
