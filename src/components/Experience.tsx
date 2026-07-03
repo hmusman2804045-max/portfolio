@@ -22,11 +22,11 @@ export default function Experience() {
 
         <FadeUp delay={0.1}>
           <h2
-            className="mt-8 max-w-3xl font-extrabold uppercase text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]"
+            className="mt-8 max-w-3xl font-bold text-white"
             style={{
-              fontSize: 'clamp(30px, 4vw, 56px)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
+              fontSize: 'clamp(22px, 2.4vw, 34px)',
+              lineHeight: 1.25,
+              letterSpacing: '-0.01em',
             }}
           >
             Current status{' '}
@@ -67,22 +67,22 @@ export default function Experience() {
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="inline-flex items-center gap-3 rounded-full border border-green-400/40 bg-green-400/10 px-6 py-3"
+                className="inline-flex items-center gap-2.5 rounded-full border border-green-400/40 bg-green-400/10 px-5 py-2.5"
               >
                 <span className="relative flex h-3 w-3 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-60" />
                   <span className="relative inline-flex h-3 w-3 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,0.9)]" />
                 </span>
-                <span className="text-sm font-bold uppercase tracking-[0.15em] text-green-300 max-[900px]:text-xs">
+                <span className="text-xs font-bold uppercase tracking-[0.15em] text-green-300">
                   Open to Work
                 </span>
               </motion.div>
 
               <p
-                className="mt-8 max-w-2xl font-bold text-white"
+                className="mt-7 max-w-2xl font-bold text-white"
                 style={{
-                  fontSize: 'clamp(24px, 2.8vw, 40px)',
-                  lineHeight: 1.2,
+                  fontSize: 'clamp(19px, 2vw, 26px)',
+                  lineHeight: 1.3,
                   letterSpacing: '-0.01em',
                 }}
               >
@@ -92,7 +92,7 @@ export default function Experience() {
                 </span>
               </p>
 
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-gray-300 max-[900px]:text-sm">
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-gray-400">
                 Ready to bring applied AI skills to a team shipping real
                 products.
               </p>
@@ -112,7 +112,7 @@ export default function Experience() {
                     <p className="text-xs font-bold tracking-widest text-cyan-300/70">
                       {item.index}
                     </p>
-                    <p className="mt-3 text-xl font-bold leading-snug text-white max-[900px]:text-lg">
+                    <p className="mt-2.5 text-[17px] font-bold leading-snug text-white max-[900px]:text-base">
                       {item.label}
                     </p>
                   </motion.div>
