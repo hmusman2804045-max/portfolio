@@ -32,7 +32,7 @@ export default function Navbar() {
       >
         HMU
       </a>
-      <ul className="flex items-center gap-6 max-[900px]:gap-4">
+      <ul className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 max-[900px]:gap-x-3">
         {LINKS.map((link) => (
           <li key={link.href}>
             <a

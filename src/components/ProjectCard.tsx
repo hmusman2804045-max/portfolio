@@ -85,7 +85,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
       )}
 
-      <div className="mt-auto flex items-center justify-between gap-4 pt-6">
+      <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-6">
         {project.inDevelopment || !project.repoUrl ? (
           <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-amber-400/80">
             <LockIcon />
