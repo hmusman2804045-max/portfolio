@@ -4,6 +4,7 @@ export interface Project {
   title: string
   description: string
   repoUrl?: string
+  liveLink?: string
   tags?: string[]
   language?: string | null
   stars?: number
@@ -37,6 +38,16 @@ function LockIcon() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
       <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
       <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+  )
+}
+
+function LinkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
     </svg>
   )
 }
@@ -86,21 +97,36 @@ export default function ProjectCard({ project }: { project: Project }) {
       )}
 
       <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-6">
-        {project.inDevelopment || !project.repoUrl ? (
+        {project.inDevelopment || (!project.repoUrl && !project.liveLink) ? (
           <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-amber-400/80">
             <LockIcon />
             In Development
           </span>
         ) : (
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-white/50 transition-colors duration-200 hover:text-cyan-300 group-hover:text-cyan-300/80"
-          >
-            <GitHubIcon />
-            View on GitHub
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-white/50 transition-colors duration-200 hover:text-cyan-300 group-hover:text-cyan-300/80"
+              >
+                <GitHubIcon />
+                GitHub
+              </a>
+            )}
+            {project.liveLink && (
+              <a
+                href={project.liveLink}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-cyan-300/80 transition-colors duration-200 hover:text-cyan-200 group-hover:text-cyan-400"
+              >
+                <LinkIcon />
+                Live Demo
+              </a>
+            )}
+          </div>
         )}
 
         <div className="flex items-center gap-4 text-xs text-white/50">

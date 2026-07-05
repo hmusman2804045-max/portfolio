@@ -9,7 +9,6 @@ const REPOS_API = 'https://api.github.com/users/hmusman2804045-max/repos'
 const FEATURED_REPOS = [
   'Multi-Class-Medical-Image-Classification-System-Chest-X-ray-Based-',
   'AI-Code-Maintainability-Scoring-Engine-',
-  'Smart-Traffic-Optimization-System',
   'fraud-detection-ml-',
 ]
 
@@ -44,6 +43,17 @@ const FALLBACK_PROJECTS: Project[] = FEATURED_REPOS.map((name) => ({
   language: 'Python',
   repoUrl: `https://github.com/hmusman2804045-max/${name}`,
 }))
+
+const NEXUS_PROJECT: Project = {
+  title: "Nexus // Multimodal AI Traffic System",
+  description: "A complete AI pipeline that dynamically optimizes traffic flow. Designed 4 distinct models: YOLOv8 (CV), LSTMs (Time-Series), BERT (NLP), and PPO (RL) feeding into a futuristic React dashboard.",
+  repoUrl: "https://github.com/hmusman2804045-max/Smart-Traffic-Optimization-System",
+  liveLink: "https://nexus.hmuhammadusman.com",
+  tags: ["PyTorch", "YOLOv8", "React", "FastAPI"],
+  language: "Python",
+  stars: 0,
+  inDevelopment: false
+}
 
 const MANUAL_PROJECTS: Project[] = [
   {
@@ -84,10 +94,10 @@ export default function Projects() {
         )
           .filter((repo): repo is GitHubRepo => repo !== undefined)
           .map(toProject)
-        setProjects(featured.length > 0 ? [...featured, ...MANUAL_PROJECTS] : [...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        setProjects(featured.length > 0 ? [NEXUS_PROJECT, ...featured, ...MANUAL_PROJECTS] : [NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
       })
       .catch((err) => {
-        if (err.name !== 'AbortError') setProjects([...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        if (err.name !== 'AbortError') setProjects([NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
       })
 
     return () => controller.abort()
