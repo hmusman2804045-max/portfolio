@@ -8,7 +8,6 @@ const REPOS_API = 'https://api.github.com/users/hmusman2804045-max/repos'
 // Exact repo names to show, in display order (trailing dashes are real).
 const FEATURED_REPOS = [
   'Multi-Class-Medical-Image-Classification-System-Chest-X-ray-Based-',
-  'AI-Code-Maintainability-Scoring-Engine-',
   'fraud-detection-ml-',
 ]
 
@@ -43,6 +42,17 @@ const FALLBACK_PROJECTS: Project[] = FEATURED_REPOS.map((name) => ({
   language: 'Python',
   repoUrl: `https://github.com/hmusman2804045-max/${name}`,
 }))
+
+const MAINTAINABILITY_PROJECT: Project = {
+  title: "AI Code Maintainability Scoring Engine",
+  description: "A machine-learning system (Random Forest + CodeT5) that evaluates the structural quality of Python code via AST analysis and autonomously refactors risky code to improve its maintainability score. Features a 3D Glassmorphic UI with Post-Processing effects.",
+  repoUrl: "https://github.com/hmusman2804045-max/AI-Code-Maintainability-Scoring-Engine-",
+  liveLink: "https://ai-code-maintainability.hmuhammadusman.com",
+  tags: ["Python", "Random Forest", "CodeT5", "React", "Three.js"],
+  language: "Python",
+  stars: 0,
+  inDevelopment: false
+}
 
 const NEXUS_PROJECT: Project = {
   title: "Nexus // Multimodal AI Traffic System",
@@ -94,10 +104,10 @@ export default function Projects() {
         )
           .filter((repo): repo is GitHubRepo => repo !== undefined)
           .map(toProject)
-        setProjects(featured.length > 0 ? [NEXUS_PROJECT, ...featured, ...MANUAL_PROJECTS] : [NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        setProjects(featured.length > 0 ? [MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...featured, ...MANUAL_PROJECTS] : [MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
       })
       .catch((err) => {
-        if (err.name !== 'AbortError') setProjects([NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        if (err.name !== 'AbortError') setProjects([MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
       })
 
     return () => controller.abort()
