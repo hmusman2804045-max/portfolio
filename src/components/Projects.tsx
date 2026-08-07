@@ -68,10 +68,13 @@ const NEXUS_PROJECT: Project = {
 const MANUAL_PROJECTS: Project[] = [
   {
     title: 'Urdu Sentiment & Emotion Analysis Engine',
-    description: 'NLP engine that detects sentiment and emotion in Urdu text, built on a custom-collected corpus and served through a Flask API.',
-    tags: ['Python', 'NLP', 'Transformers', 'Flask'],
+    description: 'A production-ready multilingual NLP engine that classifies sentiment and emotion in Urdu, Roman Urdu, and mixed-language text in real-time.',
+    repoUrl: 'https://github.com/hmusman2804045-max/Urdu-Sentiment-and-Emotion-Analysis-Engine',
+    liveLink: 'https://urdu-sentiment.hmuhammadusman.com',
+    tags: ['PyTorch', 'FastAPI', 'Three.js', 'Modal'],
     language: 'Python',
-    inDevelopment: true,
+    stars: 0,
+    inDevelopment: false,
   }
 ]
 
