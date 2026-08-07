@@ -24,6 +24,10 @@ function cleanRepoName(name: string) {
   return name.replace(/-/g, ' ').trim()
 }
 
+const LIVE_LINKS: Record<string, string> = {
+  'Multi-Class-Medical-Image-Classification-System-Chest-X-ray-Based-': 'https://usman-ai-dev-healthscan-ai.hf.space',
+}
+
 function toProject(repo: GitHubRepo): Project {
   return {
     title: cleanRepoName(repo.name),
@@ -31,6 +35,7 @@ function toProject(repo: GitHubRepo): Project {
     language: repo.language,
     stars: repo.stargazers_count,
     repoUrl: repo.html_url,
+    liveLink: LIVE_LINKS[repo.name],
   }
 }
 
@@ -41,6 +46,7 @@ const FALLBACK_PROJECTS: Project[] = FEATURED_REPOS.map((name) => ({
   description: 'View the source on GitHub.',
   language: 'Python',
   repoUrl: `https://github.com/hmusman2804045-max/${name}`,
+  liveLink: LIVE_LINKS[name],
 }))
 
 const MAINTAINABILITY_PROJECT: Project = {
