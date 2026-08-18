@@ -26,6 +26,7 @@ function cleanRepoName(name: string) {
 
 const LIVE_LINKS: Record<string, string> = {
   'Multi-Class-Medical-Image-Classification-System-Chest-X-ray-Based-': 'https://usman-ai-dev-healthscan-ai.hf.space',
+  'Urdu-Sentiment-and-Emotion-Analysis-Engine': 'https://urdu-sentiment.hmuhammadusman.com',
 }
 
 function toProject(repo: GitHubRepo): Project {
