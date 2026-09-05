@@ -72,6 +72,19 @@ const NEXUS_PROJECT: Project = {
   inDevelopment: false
 }
 
+const ASKMYDOCS_PROJECT: Project = {
+  title: 'AskMyDocs AI — 3D Neural Document Q&A (RAG Engine)',
+  description:
+    'Enterprise-grade Retrieval-Augmented Generation (RAG) system with a 3D Three.js Neural Codex interface, grounded inline citations, session memory, and millisecond vector search over PDF documents.',
+  repoUrl: 'https://github.com/hmusman2804045-max/rag-ask-my-docs',
+  liveLink: 'https://askmydocs.hmuhammadusman.com/',
+  apiDocsLink: 'https://askmydocs.hmuhammadusman.com/docs',
+  tags: ['Python', 'FastAPI', 'LangChain', 'MongoDB Atlas', 'React', 'Three.js', 'Groq', 'Docker'],
+  language: 'Python',
+  stars: 0,
+  inDevelopment: false,
+}
+
 const MANUAL_PROJECTS: Project[] = [
   {
     title: 'Urdu Sentiment & Emotion Analysis Engine',
@@ -114,10 +127,10 @@ export default function Projects() {
         )
           .filter((repo): repo is GitHubRepo => repo !== undefined)
           .map(toProject)
-        setProjects(featured.length > 0 ? [MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...featured, ...MANUAL_PROJECTS] : [MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        setProjects(featured.length > 0 ? [ASKMYDOCS_PROJECT, MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...featured, ...MANUAL_PROJECTS] : [ASKMYDOCS_PROJECT, MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
       })
       .catch((err) => {
-        if (err.name !== 'AbortError') setProjects([MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        if (err.name !== 'AbortError') setProjects([ASKMYDOCS_PROJECT, MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
       })
 
     return () => controller.abort()
