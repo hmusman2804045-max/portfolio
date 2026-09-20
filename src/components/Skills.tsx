@@ -5,10 +5,12 @@ import FadeUp, { FADE_UP_EASE } from './FadeUp'
 const SKILLS = [
   'Python',
   'Machine Learning / Deep Learning',
+  'Multi-Agent AI Systems & LLMs',
   'NLP (Natural Language Processing)',
   'Computer Vision',
+  'FastAPI & Flask',
   'React',
-  'Flask',
+  'Docker & Cloud Deployment',
 ]
 
 const container: Variants = {

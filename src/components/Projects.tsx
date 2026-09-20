@@ -25,6 +25,7 @@ function cleanRepoName(name: string) {
 }
 
 const LIVE_LINKS: Record<string, string> = {
+  'Multi-Agent-Research-Assistant': 'https://research.hmuhammadusman.com',
   'Multi-Class-Medical-Image-Classification-System-Chest-X-ray-Based-': 'https://usman-ai-dev-healthscan-ai.hf.space',
   'Urdu-Sentiment-and-Emotion-Analysis-Engine': 'https://urdu-sentiment.hmuhammadusman.com',
 }
@@ -41,7 +42,7 @@ function toProject(repo: GitHubRepo): Project {
 }
 
 // Shown if the GitHub API is unreachable or rate-limited, so the section
-// never renders empty. Snapshot of the live data from 2026-07-03.
+// never renders empty.
 const FALLBACK_PROJECTS: Project[] = FEATURED_REPOS.map((name) => ({
   title: cleanRepoName(name),
   description: 'View the source on GitHub.',
@@ -50,26 +51,36 @@ const FALLBACK_PROJECTS: Project[] = FEATURED_REPOS.map((name) => ({
   liveLink: LIVE_LINKS[name],
 }))
 
-const MAINTAINABILITY_PROJECT: Project = {
-  title: "AI Code Maintainability Scoring Engine",
-  description: "A machine-learning system (Random Forest + CodeT5) that evaluates the structural quality of Python code via AST analysis and autonomously refactors risky code to improve its maintainability score. Features a 3D Glassmorphic UI with Post-Processing effects.",
-  repoUrl: "https://github.com/hmusman2804045-max/AI-Code-Maintainability-Scoring-Engine-",
-  liveLink: "https://ai-code-maintainability.hmuhammadusman.com",
-  tags: ["Python", "Random Forest", "CodeT5", "React", "Three.js"],
-  language: "Python",
+const RESEARCH_ASSISTANT_PROJECT: Project = {
+  title: 'Multi-Agent Research Assistant',
+  tagline: 'Autonomous 5-Agent AI Research Engine with Real-Time Fact Cross-Referencing, Contradiction Detection, and Cited Synthesis.',
+  description:
+    'An enterprise-grade autonomous deep research system. A specialized 5-agent pipeline deconstructs complex queries into multi-angle web searches, extracts verifiable XML claims, detects cross-source contradictions, and synthesizes structured Markdown reports with interactive citations.',
+  repoUrl: 'https://github.com/hmusman2804045-max/Multi-Agent-Research-Assistant',
+  liveLink: 'https://research.hmuhammadusman.com',
+  hfLink: 'https://huggingface.co/spaces/usman-ai-dev/multi-agent-research-assistant',
+  tags: [
+    'Python 3.13',
+    'FastAPI',
+    'Groq (Llama 3.3 / GPT-OSS-20b)',
+    'Tavily Search API',
+    'React 18',
+    'SSE Streaming',
+    'MongoDB Atlas',
+    'Docker Multi-Stage',
+    '115 Tests Passing',
+  ],
+  highlights: [
+    '5-Agent Pipeline: Planner (2–4 search angles), Search (Tavily with URL deduplication), Summarizer (XML claim parsing), Fact-Checker (cross-source consensus & contradiction detection), and Writer (cited Markdown synthesis).',
+    'Real-Time SSE Streaming UI: Live stage progress checklist (planning → searching → summarizing → fact_checking → writing) with sub-second heartbeats and interactive source viewer.',
+    'Enterprise-Grade Security: Dual-Key Storage Isolation (user_id + session_id), cryptographic JWT & PBKDF2 (100k rounds), sliding-window rate limiter, and anti-enumeration password reset.',
+    '115 / 115 Automated Tests Passing: Full test suite verifying multi-agent handoffs, prompt injection defense delimiters, isolation, and streaming endpoints.',
+  ],
+  isFlagship: true,
+  badge: 'Flagship Project',
+  language: 'Python',
   stars: 0,
-  inDevelopment: false
-}
-
-const NEXUS_PROJECT: Project = {
-  title: "Nexus // Multimodal AI Traffic System",
-  description: "A complete AI pipeline that dynamically optimizes traffic flow. Designed 4 distinct models: YOLOv8 (CV), LSTMs (Time-Series), BERT (NLP), and PPO (RL) feeding into a futuristic React dashboard.",
-  repoUrl: "https://github.com/hmusman2804045-max/Smart-Traffic-Optimization-System",
-  liveLink: "https://nexus.hmuhammadusman.com",
-  tags: ["PyTorch", "YOLOv8", "React", "FastAPI"],
-  language: "Python",
-  stars: 0,
-  inDevelopment: false
+  inDevelopment: false,
 }
 
 const ASKMYDOCS_PROJECT: Project = {
@@ -85,17 +96,42 @@ const ASKMYDOCS_PROJECT: Project = {
   inDevelopment: false,
 }
 
+const MAINTAINABILITY_PROJECT: Project = {
+  title: 'AI Code Maintainability Scoring Engine',
+  description:
+    'A machine-learning system (Random Forest + CodeT5) that evaluates the structural quality of Python code via AST analysis and autonomously refactors risky code to improve its maintainability score. Features a 3D Glassmorphic UI with Post-Processing effects.',
+  repoUrl: 'https://github.com/hmusman2804045-max/AI-Code-Maintainability-Scoring-Engine-',
+  liveLink: 'https://ai-code-maintainability.hmuhammadusman.com',
+  tags: ['Python', 'Random Forest', 'CodeT5', 'React', 'Three.js'],
+  language: 'Python',
+  stars: 0,
+  inDevelopment: false,
+}
+
+const NEXUS_PROJECT: Project = {
+  title: 'Nexus // Multimodal AI Traffic System',
+  description:
+    'A complete AI pipeline that dynamically optimizes traffic flow. Designed 4 distinct models: YOLOv8 (CV), LSTMs (Time-Series), BERT (NLP), and PPO (RL) feeding into a futuristic React dashboard.',
+  repoUrl: 'https://github.com/hmusman2804045-max/Smart-Traffic-Optimization-System',
+  liveLink: 'https://nexus.hmuhammadusman.com',
+  tags: ['PyTorch', 'YOLOv8', 'React', 'FastAPI'],
+  language: 'Python',
+  stars: 0,
+  inDevelopment: false,
+}
+
 const MANUAL_PROJECTS: Project[] = [
   {
     title: 'Urdu Sentiment & Emotion Analysis Engine',
-    description: 'A production-ready multilingual NLP engine that classifies sentiment and emotion in Urdu, Roman Urdu, and mixed-language text in real-time.',
+    description:
+      'A production-ready multilingual NLP engine that classifies sentiment and emotion in Urdu, Roman Urdu, and mixed-language text in real-time.',
     repoUrl: 'https://github.com/hmusman2804045-max/Urdu-Sentiment-and-Emotion-Analysis-Engine',
     liveLink: 'https://urdu-sentiment.hmuhammadusman.com',
     tags: ['PyTorch', 'FastAPI', 'Three.js', 'Modal'],
     language: 'Python',
     stars: 0,
     inDevelopment: false,
-  }
+  },
 ]
 
 function SkeletonCard() {
@@ -127,10 +163,37 @@ export default function Projects() {
         )
           .filter((repo): repo is GitHubRepo => repo !== undefined)
           .map(toProject)
-        setProjects(featured.length > 0 ? [ASKMYDOCS_PROJECT, MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...featured, ...MANUAL_PROJECTS] : [ASKMYDOCS_PROJECT, MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        setProjects(
+          featured.length > 0
+            ? [
+                RESEARCH_ASSISTANT_PROJECT,
+                ASKMYDOCS_PROJECT,
+                MAINTAINABILITY_PROJECT,
+                NEXUS_PROJECT,
+                ...featured,
+                ...MANUAL_PROJECTS,
+              ]
+            : [
+                RESEARCH_ASSISTANT_PROJECT,
+                ASKMYDOCS_PROJECT,
+                MAINTAINABILITY_PROJECT,
+                NEXUS_PROJECT,
+                ...FALLBACK_PROJECTS,
+                ...MANUAL_PROJECTS,
+              ],
+        )
       })
       .catch((err) => {
-        if (err.name !== 'AbortError') setProjects([ASKMYDOCS_PROJECT, MAINTAINABILITY_PROJECT, NEXUS_PROJECT, ...FALLBACK_PROJECTS, ...MANUAL_PROJECTS])
+        if (err.name !== 'AbortError') {
+          setProjects([
+            RESEARCH_ASSISTANT_PROJECT,
+            ASKMYDOCS_PROJECT,
+            MAINTAINABILITY_PROJECT,
+            NEXUS_PROJECT,
+            ...FALLBACK_PROJECTS,
+            ...MANUAL_PROJECTS,
+          ])
+        }
       })
 
     return () => controller.abort()
@@ -169,7 +232,7 @@ export default function Projects() {
                   key={project.title}
                   delay={0.1 + i * 0.1}
                   y={24}
-                  className="h-full"
+                  className={project.isFlagship ? 'col-span-1 md:col-span-2 h-full' : 'h-full'}
                 >
                   <ProjectCard project={project} />
                 </FadeUp>
