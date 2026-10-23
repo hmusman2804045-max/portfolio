@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import FadeUp from './FadeUp'
 import ProjectCard from './ProjectCard'
 import type { Project } from './ProjectCard'
+import ProjectDetail from './ProjectDetail'
 
 const REPOS_API = 'https://api.github.com/users/hmusman2804045-max/repos'
 
@@ -83,6 +85,33 @@ const RESEARCH_ASSISTANT_PROJECT: Project = {
   inDevelopment: false,
 }
 
+const RSNA_KNEE_PROJECT: Project = {
+  title: 'RSNA Knee Abnormality Detection (Kaggle, Solo)',
+  description:
+    'Detecting 12 knee abnormalities from MRI scans. Built my own EfficientNet ensemble, then evaluated top public pipelines. Final private score: 0.942 macro AUC.',
+  highlights: [
+    'Problem: Predict 12 knee abnormalities under a 9-hour notebook limit, no internet, and ~1,300 hidden test studies (Macro AUC metric).',
+    'My Pipeline: 2.5D EfficientNet ensemble (5 models) trained on weak labels from radiology reports with soft targets.',
+    'Public Pipelines: Evaluated & reproduced strong CoAtNet + ConvNeXt pipelines from public notebooks by other participants.',
+    'Final Result: 0.942 macro AUC private score, selecting two diverse pipelines to spread private risk.',
+  ],
+  caseStudySlug: 'rsna-knee',
+  kaggleLink: 'https://www.kaggle.com/competitions/rsna-knee-abnormality-detection',
+  tags: [
+    'Python',
+    'PyTorch',
+    'timm',
+    'EfficientNet',
+    'CoAtNet',
+    'ConvNeXt',
+    'Kaggle',
+    'Medical Imaging',
+  ],
+  language: 'Python',
+  stars: 0,
+  inDevelopment: false,
+}
+
 const ASKMYDOCS_PROJECT: Project = {
   title: 'AskMyDocs AI — 3D Neural Document Q&A (RAG Engine)',
   description:
@@ -148,6 +177,37 @@ function SkeletonCard() {
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[] | null>(null)
+  const [activeCaseStudy, setActiveCaseStudy] = useState<string | null>(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#case-study-rsna-knee') {
+      return 'rsna-knee'
+    }
+    return null
+  })
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#case-study-rsna-knee') {
+        setActiveCaseStudy('rsna-knee')
+      } else if (window.location.hash !== '#case-study-rsna-knee') {
+        setActiveCaseStudy(null)
+      }
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  const handleOpenCaseStudy = (slug: string) => {
+    setActiveCaseStudy(slug)
+    window.location.hash = `case-study-${slug}`
+  }
+
+  const handleCloseCaseStudy = () => {
+    setActiveCaseStudy(null)
+    if (window.location.hash.startsWith('#case-study-')) {
+      window.location.hash = 'projects'
+    }
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -167,6 +227,7 @@ export default function Projects() {
           featured.length > 0
             ? [
                 RESEARCH_ASSISTANT_PROJECT,
+                RSNA_KNEE_PROJECT,
                 ASKMYDOCS_PROJECT,
                 MAINTAINABILITY_PROJECT,
                 NEXUS_PROJECT,
@@ -175,6 +236,7 @@ export default function Projects() {
               ]
             : [
                 RESEARCH_ASSISTANT_PROJECT,
+                RSNA_KNEE_PROJECT,
                 ASKMYDOCS_PROJECT,
                 MAINTAINABILITY_PROJECT,
                 NEXUS_PROJECT,
@@ -187,6 +249,7 @@ export default function Projects() {
         if (err.name !== 'AbortError') {
           setProjects([
             RESEARCH_ASSISTANT_PROJECT,
+            RSNA_KNEE_PROJECT,
             ASKMYDOCS_PROJECT,
             MAINTAINABILITY_PROJECT,
             NEXUS_PROJECT,
@@ -234,11 +297,22 @@ export default function Projects() {
                   y={24}
                   className={project.isFlagship ? 'col-span-1 md:col-span-2 h-full' : 'h-full'}
                 >
-                  <ProjectCard project={project} />
+                  <ProjectCard
+                    project={{
+                      ...project,
+                      onOpenCaseStudy: handleOpenCaseStudy,
+                    }}
+                  />
                 </FadeUp>
               ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {activeCaseStudy === 'rsna-knee' && (
+          <ProjectDetail onClose={handleCloseCaseStudy} />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

@@ -9,6 +9,9 @@ export interface Project {
   liveLink?: string
   hfLink?: string
   apiDocsLink?: string
+  kaggleLink?: string
+  caseStudySlug?: string
+  onOpenCaseStudy?: (slug: string) => void
   tags?: string[]
   language?: string | null
   stars?: number
@@ -70,6 +73,23 @@ function HuggingFaceIcon() {
   )
 }
 
+function KaggleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 shrink-0" aria-hidden="true">
+      <path d="M18.825 23.859c-.022.046-.054.084-.092.113a.355.355 0 0 1-.208.066h-3.41c-.244 0-.448-.106-.593-.306l-5.46-7.464l-2.022 1.944v5.44c0 .21-.078.39-.234.542a.747.747 0 0 1-.546.226H3.774a.75.75 0 0 1-.547-.226.745.745 0 0 1-.234-.542V.768c0-.21.078-.39.234-.543A.747.747 0 0 1 3.774 0h2.484c.21 0 .393.076.546.225c.156.153.234.333.234.543v13.68l7.155-7.234a.798.798 0 0 1 .593-.254h3.58c.18 0 .317.066.402.195c.088.13.088.272 0 .428l-6.726 6.703l7.02 9.278c.09.12.1.25.03.385l-.267.41z"/>
+    </svg>
+  )
+}
+
+function CaseStudyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0" aria-hidden="true">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    </svg>
+  )
+}
+
 function StarIcon() {
   return (
     <svg
@@ -107,9 +127,19 @@ export default function ProjectCard({ project }: { project: Project }) {
     >
       {/* Header with Title and Flagship/Featured Badge */}
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <h3 className="text-lg font-bold leading-snug text-white transition-colors duration-300 group-hover:text-cyan-200">
-          {project.title}
-        </h3>
+        {project.caseStudySlug && project.onOpenCaseStudy ? (
+          <button
+            type="button"
+            onClick={() => project.onOpenCaseStudy?.(project.caseStudySlug!)}
+            className="text-left text-lg font-bold leading-snug text-white transition-colors duration-300 hover:text-cyan-200 group-hover:text-cyan-200"
+          >
+            {project.title}
+          </button>
+        ) : (
+          <h3 className="text-lg font-bold leading-snug text-white transition-colors duration-300 group-hover:text-cyan-200">
+            {project.title}
+          </h3>
+        )}
 
         {project.badge && (
           <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]">
@@ -165,13 +195,39 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       {/* Action Buttons & Links */}
       <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-6">
-        {project.inDevelopment || (!project.repoUrl && !project.liveLink && !project.hfLink) ? (
+        {project.inDevelopment ||
+        (!project.repoUrl &&
+          !project.liveLink &&
+          !project.hfLink &&
+          !project.caseStudySlug &&
+          !project.kaggleLink) ? (
           <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-amber-400/80">
             <LockIcon />
             In Development
           </span>
         ) : (
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            {project.caseStudySlug && project.onOpenCaseStudy && (
+              <button
+                type="button"
+                onClick={() => project.onOpenCaseStudy?.(project.caseStudySlug!)}
+                className="flex items-center gap-2 rounded-lg border border-cyan-400/40 bg-cyan-400/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-cyan-200 transition-all duration-200 hover:border-cyan-300 hover:bg-cyan-400/25 hover:text-white hover:shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+              >
+                <CaseStudyIcon />
+                Case Study
+              </button>
+            )}
+            {project.kaggleLink && (
+              <a
+                href={project.kaggleLink}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-400/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-sky-200 transition-all duration-200 hover:border-sky-400 hover:bg-sky-400/20 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.3)]"
+              >
+                <KaggleIcon />
+                Kaggle
+              </a>
+            )}
             {project.liveLink && (
               <a
                 href={project.liveLink}
